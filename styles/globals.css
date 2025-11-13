@@ -1,0 +1,320 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand: 240 83 45; /* Solid Systems brand orange/red */
+    --brand-light: 255 126 95;
+    --brand-dark: 200 60 25;
+    --accent: 41 123 236; /* Modern blue */
+    --accent-light: 85 156 255;
+    --text: 31 41 55;
+  }
+
+  html, body, #__next {
+    height: 100vh;
+    background: linear-gradient(135deg, 
+      rgb(252 252 253),
+      rgb(248 249 251) 25%,
+      rgb(243 245 249) 50%,
+      rgb(240 243 250) 75%,
+      rgb(237 241 248)
+    );
+    background-size: 400% 400%;
+    color: rgb(var(--text));
+    overflow: hidden;
+    animation: subtleShift 15s ease infinite;
+  }
+
+  @keyframes subtleShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Accent glow */
+  ::selection {
+    background: rgba(var(--brand), 0.15);
+  }
+
+  /* Responsive typography */
+  @media screen and (max-width: 375px) {
+    html { font-size: 13px; }
+  }
+  @media screen and (min-width: 376px) and (max-width: 640px) {
+    html { font-size: 13.5px; }
+  }
+  @media screen and (min-width: 641px) and (max-width: 768px) {
+    html { font-size: calc(14px + 0.2vw); }
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    html { font-size: calc(14.5px + 0.25vw); }
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1280px) {
+    html { font-size: calc(15px + 0.3vw); }
+  }
+  @media screen and (min-width: 1281px) and (max-width: 1920px) {
+    html { font-size: calc(15px + 0.2vw); }
+  }
+  @media screen and (min-width: 1921px) {
+    html { font-size: calc(16px + 0.1vw); }
+  }
+
+  /* Responsive height and spacing adjustments */
+  @media screen and (max-height: 600px) {
+    html, body, #__next {
+      height: auto;
+      min-height: 100vh;
+    }
+  }
+  
+  @media screen and (max-width: 640px) {
+    body {
+      font-size: 14px;
+    }
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.05),
+      0 2px 4px -1px rgba(0, 0, 0, 0.03),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 
+      0 10px 25px -3px rgba(var(--brand), 0.15),
+      0 4px 6px -2px rgba(0, 0, 0, 0.02),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+  }
+  
+  .brand-gradient {
+    background: linear-gradient(135deg, 
+      rgb(var(--brand)) 0%,
+      rgb(var(--brand-light)) 50%,
+      rgb(var(--brand)) 100%
+    );
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease infinite;
+  }
+
+  .accent-gradient {
+    background: linear-gradient(135deg, 
+      rgb(var(--accent)) 0%,
+      rgb(var(--accent-light)) 50%,
+      rgb(var(--accent)) 100%
+    );
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease infinite;
+  }
+
+  .glow {
+    text-shadow: 0 0 30px rgba(var(--brand), 0.3);
+  }
+
+  .glow-brand {
+    text-shadow: 0 0 40px rgba(var(--brand), 0.4);
+  }
+
+  .glow-accent {
+    text-shadow: 0 0 40px rgba(var(--accent), 0.4);
+  }
+
+  /* Modern pill badge */
+  .status-badge {
+    background: linear-gradient(135deg, rgb(var(--brand)), rgb(var(--brand-light)));
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    box-shadow: 0 2px 4px rgba(var(--brand), 0.1);
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .8; }
+  }
+
+  /* Animated underline */
+  .hover-underline {
+    position: relative;
+  }
+
+  .hover-underline::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: rgb(var(--brand));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .hover-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* Responsive container adjustments */
+  .responsive-container {
+    max-width: 2000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Mobile-first responsive spacing */
+  @media screen and (max-width: 640px) {
+    .responsive-container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    .glass-card {
+      padding: 1rem;
+    }
+  }
+
+  @media screen and (min-width: 641px) and (max-width: 1024px) {
+    .responsive-container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    .glass-card {
+      padding: 1.5rem;
+    }
+  }
+
+  @media screen and (min-width: 1025px) {
+    .responsive-container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+    .glass-card {
+      padding: 2rem;
+    }
+  }
+
+  /* Grid adjustments for small screens */
+  @media screen and (max-width: 480px) {
+    .kpi-grid, .chart-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .chart-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  @media screen and (min-width: 1025px) {
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  /* Text responsiveness for headers */
+  @media screen and (max-width: 640px) {
+    .header-title {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+    .card-title {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
+  }
+
+  @media screen and (min-width: 641px) and (max-width: 1024px) {
+    .header-title {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+    .card-title {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+  }
+
+  @media screen and (min-width: 1025px) {
+    .header-title {
+      font-size: 3.75rem;
+      line-height: 1;
+    }
+    .card-title {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+  }
+
+  /* Touch-friendly spacing for mobile */
+  @media (hover: none) and (pointer: coarse) {
+    .glass-card {
+      padding-top: 1.25rem;
+      padding-bottom: 1.25rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+    button, [role="button"] {
+      min-height: 44px;
+    }
+  }
+
+  /* Reduce animation on small screens for performance */
+  @media screen and (max-width: 640px) {
+    @media (prefers-reduced-motion: no-preference) {
+      .glass-card {
+        transition: background 0.2s ease, border-color 0.2s ease;
+      }
+    }
+  }
+}
