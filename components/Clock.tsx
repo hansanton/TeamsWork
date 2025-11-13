@@ -20,11 +20,11 @@ export default function Clock() {
   }).format(now)
 
   return (
-    <div className="glass-card p-6 lg:p-8 rounded-2xl min-w-[400px] group transition-all duration-300">
-      <div className="text-6xl lg:text-8xl font-display font-extrabold text-gray-800 tabular-nums tracking-tight glow-brand">
+    <div className="glass-card p-2 lg:p-3 rounded-2xl min-w-[250px] lg:min-w-[350px] group transition-all duration-300">
+      <div className="text-3xl lg:text-6xl font-display font-extrabold text-gray-800 tabular-nums tracking-tight glow-brand">
         {time}
       </div>
-      <div className="text-xl lg:text-2xl text-gray-500 group-hover:text-brand/80 transition-colors duration-300 mt-2 capitalize">
+      <div className="text-xs lg:text-lg text-gray-500 group-hover:text-brand/80 transition-colors duration-300 mt-0.5 lg:mt-1 capitalize">
         {date}
       </div>
     </div>
